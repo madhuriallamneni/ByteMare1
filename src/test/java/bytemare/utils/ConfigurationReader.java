@@ -4,7 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-import org.apache.commons.compress.archivers.zip.X000A_NTFS;
+
 
 public class ConfigurationReader {
     private static Properties properties;

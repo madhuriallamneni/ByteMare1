@@ -1,5 +1,4 @@
 package bytemare.tests;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -22,7 +21,16 @@ public class DataBase {
 
 	public ArrayList<Customer> getData() throws ClassNotFoundException, SQLException {
 
-		String query = "select FIRST_NAME,LAST_NAME,SSN,PHONE_NUMBER,DOB,EMAIL from TEST4 where rownum <2 ";
+		String query = "select A.ID as ID, \r\n" + 
+				"B.FIRST_NAME,\r\n" + 
+				"B.LAST_NAME, \r\n" + 
+				"translate (A.PHONE_NUMBER,'0123456789','0769812345') as PHONE_NUMBER, \r\n" + 
+				"A.DOB+3 AS DOB, translate (A.SSN,'0123456789','0769812345') AS SSN, \r\n" + 
+				"SUBSTR(A.FIRST_NAME,1,2)||'TEST.'||SUBSTR(A.LAST_NAME,1,2)||'TEST@SOGETIUSA.COM' AS EMAIL\r\n" + 
+				"FROM TEST5 A \r\n" + 
+				"JOIN TEST3 B \r\n" + 
+				"ON A.ID = B.ID WHERE ROWNUM = 25 ";
+		 
 
 		ArrayList<Customer> customeRS = new ArrayList<Customer>();
 		try {
@@ -35,18 +43,18 @@ public class DataBase {
 				ResultSet rs = stmt.executeQuery(query);
 				Customer customer = new Customer();
 				while (rs.next()) {
-
-					customer.setFirstName(rs.getString("FIRST_NAME"));
+					
+		            customer.setFirstName(rs.getString("FIRST_NAME"));
 					customer.setLastName(rs.getString("LAST_NAME"));
 					customer.setSsn(rs.getString("SSN"));
 					customer.setPhoneNumber(rs.getString("PHONE_NUMBER"));
-					customer.setDob(rs.getDate("DOB"));
+				      customer.setDob(rs.getString("DOB"));
 					customer.setEmail(rs.getString("EMAIL"));
 					customeRS.add(customer);
-
-				}
-
-			} else {
+				} 
+					}
+				
+			 else {
 				System.out.println("Failed to make connection!");
 			}
 
@@ -64,4 +72,5 @@ public class DataBase {
 		return customeRS;
 	}
 
+	
 }

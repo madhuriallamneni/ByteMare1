@@ -1,24 +1,26 @@
 package bytemare.tests;
-
-import java.util.Date;
-
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
-public class Customer {
+import bytemare.utils.TestBase;
+public class Customer extends TestBase {
+	
+	
 	
 	private String firstName;
 	private String lastName;
 	private String phoneNumber;
 	private String email;
-	private Date dob;
 	private String ssn;
+	public int length;
+	public static String dob;
+
 	
-		//POJO
+
+	
+		//POJ
 	
 	/**
 	 * @return the firstName
 	 */
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -67,13 +69,14 @@ public class Customer {
 	/**
 	 * @return the dob
 	 */
-	public CharSequence[] getDob() {
-		CharSequence[] date = null;
-		return date;
-	}
-	public Date setDob() {
-		return dob;
-	}
+	 public String getDob() {
+	        return dob;
+	    }
+
+	    public void setDob(String dob) {
+	        Customer.dob = dob;
+	    }
+	 
 	/**
 	 * @param dob the dob to set
 	 */
@@ -90,9 +93,6 @@ public class Customer {
 	public void setSsn(String ssn) {
 		this.ssn = ssn;
 	}
-	public void setDob(java.sql.Date date) {
-		// TODO Auto-generated method stub
-		
-	}
 
-}
+	
+	}
